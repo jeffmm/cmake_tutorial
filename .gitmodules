@@ -1,3 +1,6 @@
-[submodule "tests/catch2"]
-	path = tests/catch2
+[submodule "v3/tests/catch2"]
+	path = v3/tests/catch2
+	url = https://github.com/catchorg/Catch2
+[submodule "v4/tests/catch2"]
+	path = v4/tests/catch2
 	url = https://github.com/catchorg/Catch2
