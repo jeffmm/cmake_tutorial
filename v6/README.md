@@ -36,13 +36,13 @@ pip3 install cookiecutter
 Then quickly scaffold a git repository using
 
 ```bash
-cookiecutter https://github.com/jeffmm/cmake-project-cookiecutter
+cookiecutter https://github.com/jeffmm/cmake_project_cookiecutter
 ```
 
 or equivalently
 
 ```bash
-cookiecutter gh:jeffmm/cmake-project-cookiecutter
+cookiecutter gh:jeffmm/cmake_project_cookiecutter
 ```
 
 You will receive some prompts on the command line, such as the name of your project, etc. Once you finish filling them out, cookiecutter will scaffold your new project for you! The only thing left to do is register it as a git repo and push it to a remote repository.
