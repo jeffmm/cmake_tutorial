@@ -40,6 +40,15 @@ TEST_CASE("TakeTwo test") {
 }
 ```
 
+Now let's add Catch2 as a submodule to the project.
+
+```bash
+cd tests
+git submodule add https://github.com/catchorg/Catch2 catch2
+```
+
+This will clone the Catch2 repository into the `tests` folder as a submodule. (NOTE: There is not much benefit in adding Catch2 as a submodule, since it can be included in your project as a single header file! This is meant for instructive purposes).
+
 The file `tests/CMakeLists.txt` will be
 
 ```cmake
@@ -52,14 +61,7 @@ target_link_libraries(test_take_two PRIVATE take_two Catch2::Catch2)
 add_test(NAME take_two_test COMMAND test_take_two)
 ```
 
-Notice that we are including a subdirectory called `catch2` that does not yet exist. The only thing left to do is to add Catch2 as a submodule to the project.
-
-```bash
-cd tests
-git submodule add https://github.com/catchorg/Catch2 catch2
-```
-
-This will clone the Catch2 repository into the `tests` folder as a submodule. Now we need to change the top-level `CMakeLists.txt` file to optionally include the unit tests in the build. Add the following to the end of the file:
+Now we need to change the top-level `CMakeLists.txt` file to optionally include the unit tests in the build. Add the following to the end of the file:
 
 ```cmake
 # Testing only available if this is the main project
