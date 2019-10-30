@@ -70,13 +70,18 @@ add_subdirectory(src)
 and the file `src/CMakeLists.txt` should be
 
 ```cmake
-file(GLOB HEADERS CONFIGURE_DEPENDS "${TakeTwo_SOURCE_DIR}/include/take_two/*.hpp")
+# Define library headers
+set (HEADERS ../include/take_two/take_two.hpp)
 
-# Make a static or dynamic depending on user setting
-add_library(take_two take_two.cpp ${HEADERS})
+# Make a static library (tradeoff of memory for better performance)
+add_library (take_two STATIC take_two.cpp ${HEADERS})
 
-# We need this directory, and users of our library will need it too
-target_include_directories(take_two PUBLIC ../include)
+# Set target includes
+target_include_directories (take_two PUBLIC ../include)
+
+# Make install targets
+install (TARGETS take_two DESTINATION lib)
+install (FILES ${HEADERS} DESTINATION include/take_two)
 ```
 
 Then add and push the changes to the remote
@@ -98,6 +103,16 @@ make
 
 The library `libtake_two.a` will be built inside the `src` folder in the new `build` directory. To install the library on a local machine, you could copy `include/take_two` into your `/usr/local/include` and copy `libtake_two.a` into your `/usr/local/lib`.
 
-A better way would be to include an install interface in the CMake file, but that's a discussion for another time.
+Our install targets handle this automatically. Simply do
 
-A more robust way would be to include the repository as a submodule in a parent project that uses Take Two as a dependency. More on how to do that later.
+```bash
+make install
+```
+
+And you can start using the library right away using the usual linking:
+
+```bash
+g++ myproject.cpp -ltake_two
+```
+
+You could also include Take Two as a subproject in the parent project's build tree by including Take Two as a submodule. More on that later.
