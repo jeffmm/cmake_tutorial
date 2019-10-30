@@ -18,9 +18,9 @@ set_target_properties(take_two PROPERTIES PUBLIC_HEADER "${HEADERS}")
 # Set install targets and destinations
 install(TARGETS take_two
     EXPORT take_two-targets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/take_two)
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    PUBLIC_HEADER DESTINATION include/take_two)
 
 # Export additional install files (for clients using CMake)
 install(EXPORT take_two-targets
