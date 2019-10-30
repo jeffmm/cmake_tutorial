@@ -7,3 +7,7 @@
 [submodule "v5/tests/catch2"]
 	path = v5/tests/catch2
 	url = https://github.com/catchorg/Catch2
+[submodule "v7/extern/take_two"]
+	path = v7/extern/take_two
+	url = https://github.com/jeffmm/take_two
+	branch = submodule
