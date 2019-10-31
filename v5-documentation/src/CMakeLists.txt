@@ -17,14 +17,14 @@ set_target_properties(TakeTwo PROPERTIES PUBLIC_HEADER "${HEADERS}")
 
 # Set install targets and destinations
 install(TARGETS TakeTwo
-    EXPORT TakeTwo-targets
+    EXPORT TakeTwoTargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     PUBLIC_HEADER DESTINATION include/take_two)
 
 # Export additional install files (for clients using CMake)
-install(EXPORT TakeTwo-targets
+install(EXPORT TakeTwoTargets
     NAMESPACE TakeTwo::
-    FILE TakeTwo-config.cmake
+    FILE TakeTwoConfig.cmake
     DESTINATION lib/cmake/take_two)
 
