@@ -10,9 +10,12 @@ project_name
 ├── src
 │   ├── CMakeLists.txt
 │   └── lib.cpp
-├── example
+├── examples
 │   ├── CMakeLists.txt
 │   └── example.cpp
+├── thirdparty
+│   ├── CMakeLists.txt
+│   └── catch2
 ├── tests
 │   ├── CMakeLists.txt
 │   └── test_lib.cpp
@@ -45,4 +48,6 @@ or equivalently
 cookiecutter gh:jeffmm/cmake_project_cookiecutter
 ```
 
-You will receive some prompts on the command line, such as the name of your project, etc. Once you finish filling them out, cookiecutter will scaffold your new project for you! The only thing left to do is register it as a git repo and push it to a remote repository.
+You will receive some prompts on the command line, such as the name of your project, your GitHub username, etc. Once you finish answering, cookiecutter will scaffold your new project for you! All you have left to do is initialize the repo using `git init` and push the repo to a new repository on GitHub. 
+
+Now you can get straight to coding!

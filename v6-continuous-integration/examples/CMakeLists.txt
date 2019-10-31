@@ -1,2 +1,2 @@
 add_executable(example example.cpp)
-target_link_libraries(example PRIVATE take_two)
+target_link_libraries(example PRIVATE TakeTwo)

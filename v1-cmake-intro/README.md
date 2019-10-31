@@ -44,7 +44,7 @@ take_two
 
 The files `include/take_two/take_two.hpp` and `src/take_two.cpp` will be the header and source files for the TakeTwo library. In my example project, the library has a single class `TakeTwo`, which wraps a static member function that takes two values and computes some basic arithmetic (boring, I know, but it's instructive).
 
-and the top-level `CMakeLists.txt` file should be
+and the top-level `CMakeLists.txt` file should always start with the `cmake_minimum_required()` function, followed by the `project()` details.
 
 ```cmake
 # Tested for CMake version 3.XX
@@ -61,7 +61,7 @@ project(TakeTwo
 add_subdirectory(src)
 ```
 
-and the file `src/CMakeLists.txt` should be
+This `CMakeLists.txt` file will tell CMake to now search the `src` directory for additional CMake files. The file `src/CMakeLists.txt` will give CMake the instructions on how to build the library.
 
 ```cmake
 # Define library headers
@@ -78,13 +78,15 @@ install (TARGETS TakeTwo DESTINATION lib)
 install (FILES ${HEADERS} DESTINATION include/take_two)
 ```
 
+This is a minimalist CMake file, but it will get the job done. To see a more robust version, check out the `src/CMakeLists.txt` file in the `v3-examples` directory.
+
 The `.gitignore` file should have the line:
 
 ```bash
 /build*
 ```
 
-as well as any additional files you do **not** want to be tracked in your git repo.
+as well as any additional files you do **not** want to be tracked in your git repo. Never track your built binaries or libraries using git.
 
 Add and commit your changes locally, then push the changes to your remote repo on GitHub.
 

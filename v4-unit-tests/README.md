@@ -1,4 +1,4 @@
-# Take Two v0.3
+# TakeTwo v0.3
 
 ## Let's add some unit tests
 
@@ -67,10 +67,10 @@ and the `tests/CMakeLists.txt` file should be
 add_executable(test_take_two test_take_two.cpp)
 
 # Link to the take_two library and Catch2 testing library
-target_link_libraries(test_take_two PRIVATE take_two Catch2::Catch2)
+target_link_libraries(test_take_two PRIVATE TakeTwo Catch2::Catch2)
 
 # Add the test to CTest, so it will be run with the 'test' make-target
-add_test(NAME take_two_test COMMAND test_take_two)
+add_test(NAME TakeTwo_test COMMAND test_take_two)
 ```
 
 Now we need to change the top-level `CMakeLists.txt` file to optionally include the unit tests in the build. Add the following to the end of the file:

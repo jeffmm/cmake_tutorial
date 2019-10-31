@@ -1,10 +1,12 @@
-# Take Two v0.5
+# TakeTwo v0.5
 
 ## Let's add continuous integration using Travis CI
 
-For starters, go to https://travis-ci.com and log in using your GitHub credentials. If you haven't already, grant Travis CI access to your GitHub repository.
+Now we are going to add continuous integration (CI), a development strategy that employs automated builds of our project to make sure everything is working and up-to-date. We will do this through a service called Travis CI that builds and tests our code every time we push new changes to GitHub.
 
-Create a file in your project folder named `.travis.yml`
+For starters, go to https://travis-ci.com and log in using your GitHub credentials. Then follow the instructions on the website to grant Travis CI access to your GitHub repository.
+
+Now create a file in your project folder named `.travis.yml`
 
 ```bash
 take_two
@@ -17,6 +19,9 @@ take_two
 ├── example
 │   ├── CMakeLists.txt
 │   └── example.cpp
+├── thirdparty
+│   ├── CMakeLists.txt
+│   └── catch2
 ├── tests
 │   ├── CMakeLists.txt
 │   └── test_take_two.cpp
@@ -50,12 +55,12 @@ script: make && make test
 
 After pushing your changes to your GitHub repository, navigate to https://www.travis-ci.com to watch your build get tested in real time.
 
-If you want, you can have Travis CI email you whenever your build fails.
+If you want, you can have Travis CI email you whenever your build fails to let you know there's a problem.
 
-Once your build succeeds, you can show off your achievement by clicking on the status image next to the repository name on Travis CI, setting the format to Markdown, and copying the result to the top of your `README.md` file. The result will look like:
+Once your build succeeds, you can show off your achievement by clicking on the status image on your repository's build page at the Travis CI website, setting the format to Markdown, and copying the result to the top of your `README.md` file. The result will look like:
 
 [![Build Status](https://travis-ci.com/jeffmm/take_two.svg?branch=master)](https://travis-ci.com/jeffmm/take_two)
 
-Now all you have left to do is write a brief explanation about your project in your README and add a LICENSE.
+To finish your project properly, add a project overview and install instructions to your README and then add a LICENSE. You can find options for a LICENSE on GitHub by navigating to your repository, clicking "Create new file" and entering LICENSE for the file name. You will see a new button appear, "Choose a license template," that will help you select a license that suits your needs.
 
 Congratulations, your project now looks pro!

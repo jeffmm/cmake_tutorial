@@ -1,8 +1,17 @@
-# Take Two v0.2
+# TakeTwoProject v0.1
 
 ## Let's create a new project that uses TakeTwo as a dependency
 
-Create a new git repository and give it a name like take_two_project
+In this project, we will include TakeTwo as a submodule in the parent project TakeTwoProject. Submodules are useful when
+* The submodule code and project code are part of a common codebase or suite that should be shipped together
+* The submodule code is not slow to compile
+* The submodule code is not a common dependency that a developer would expect their clients to install
+
+Submodules should not be used for libraries that are very large and cumbersome to install, or if the library can be easily installed using a package manager.
+
+As we will see later, containers can offer the best of both worlds, allowing developers to ship their pre-compiled library dependencies within a Docker image, with the disadvantage of requiring users to have Docker installed.
+
+Create a new git repository and give it a name like `take_two_project`.
 
 The project structure should look similar to this
 
@@ -20,7 +29,7 @@ take_two_project
 
 Since take_two_project will only be an executable binary, there is no include folder here.
 
-The top-level CMakeLists.txt file should look like this:
+The top-level `CMakeLists.txt` file should look like this:
 
 ```cmake
 cmake_minimum_required(VERSION 3.4)
@@ -44,8 +53,8 @@ file (GLOB SOURCES "*.cpp")
 # Compile sources into an executable binary
 add_executable (take_two_project ${SOURCES})
 
-# Link the take_two library to the executable
-target_link_libraries (take_two_project take_two)
+# Link the TakeTwo library to the executable
+target_link_libraries (take_two_project TakeTwo)
 
 # Install the executable locally
 install(TARGETS take_two_project DESTINATION bin)
@@ -57,20 +66,20 @@ And your `thirdparty/CMakeLists.txt` file only needs the line:
 add_subdirectory (take_two)
 ```
 
-Now we will add the take_two project repository as a submodule for our new project.
+Now we will add the TakeTwo project repository as a submodule for our new project.
 
 ```bash
 cd thirdparty
 git submodule add https://github.com/<your_github_username>/take_two.git take_two
 ```
 
-This will clone your take_two project repository into the `thirdparty` folder, and register take_two as a submodule in a newly-created `.gitmodules` file.
+This will clone your TakeTwo project repository into the `thirdparty` folder, and register it as a submodule in a newly-created `.gitmodules` file.
 
-Note: the take_two_project repo will **not** track the submodule's files, but instead tracks a pointer to a single commit in the submodule repository. By default, this commit is the most recent commit on the submodule's master branch. You can choose to track a different branch using the command `git submodule add -b <branch_name> <repo_url> <local_folder>`.
+Note: the TakeTwoProject repo will **not** track the TakeTwo submodule's files, but instead tracks a pointer to a single commit in the submodule repository. By default, this commit is the most recent commit on the submodule's master branch. In order to have the pointer track future commits to the master branch, you can add the flag `git submodule add -b master <repo_url> <local_folder>`.  You can also choose to track a different branch using the same flag: `git submodule add -b <branch_name> ...`
 
 In my example case here, my submodule is pointing to a branch named `submodule` in this same repository, which is identical to the contents of the `v1-cmake-intro` folder.
 
-Now we can compose a simple main function that utilizes the take_two library. For example, my `src/take_two_project.cpp` file looks like this:
+Now we can compose a simple main function that utilizes the TakeTwo library. For example, my `src/take_two_project.cpp` file looks like this:
 
 ```cpp
 #include <iostream>

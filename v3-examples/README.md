@@ -1,8 +1,8 @@
-# Take Two v0.2
+# TakeTwo v0.2
 
 ## Let's create an example executable
 
-Add a folder named `examples` to your directory like so
+Now we are going to add an example executable to our TakeTwo library. Add a folder named `examples` to your directory like so
 
 ```bash
 take_two
@@ -20,7 +20,7 @@ take_two
 └── .gitignore
 ```
 
-`examples/example.cpp` should just be a simple main function that includes the take_two library and demonstrates its functionality:
+`examples/example.cpp` should just be a simple main function that includes the TakeTwo library and demonstrates its functionality:
 ```cpp
 #include <take_two/take_two.hpp>
 
@@ -36,7 +36,7 @@ The `examples/CMakeLists.txt` file should be
 
 ```cmake
 add_executable(example example.cpp)
-target_link_libraries(example PRIVATE take_two)
+target_link_libraries(example PRIVATE TakeTwo)
 ```
 
 Now add the following line to the bottom of your top-level `CMakeLists.txt` file:
