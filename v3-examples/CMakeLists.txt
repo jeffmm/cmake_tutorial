@@ -12,4 +12,4 @@ project(TakeTwo
 add_subdirectory(src)
 
 # The executable code is here
-add_subdirectory(example)
+add_subdirectory(examples)

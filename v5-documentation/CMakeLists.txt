@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.4)
 
 # Project name and a few useful settings. Other commands can pick up the results
 project(TakeTwo
-    VERSION 0.5
+    VERSION 0.4
     DESCRIPTION "An example project with CMake"
     LANGUAGES CXX
 )
@@ -19,11 +19,14 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     endif()
 endif()
 
+# Add any third-party dependencies
+add_subdirectory(thirdparty)
+
 # The compiled library code is here
 add_subdirectory(src)
 
 # The executable code is here
-add_subdirectory(example)
+add_subdirectory(examples)
 
 # Testing only available if this is the main project
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND TESTS)

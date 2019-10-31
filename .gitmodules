@@ -1,13 +1,13 @@
-[submodule "v3/tests/catch2"]
-	path = v3/tests/catch2
-	url = https://github.com/catchorg/Catch2
-[submodule "v4/tests/catch2"]
-	path = v4/tests/catch2
-	url = https://github.com/catchorg/Catch2
-[submodule "v5/tests/catch2"]
-	path = v5/tests/catch2
-	url = https://github.com/catchorg/Catch2
-[submodule "v7/extern/take_two"]
-	path = v7/extern/take_two
+[submodule "v2-submodules/thirdparty/take_two"]
+	path = v2-submodules/thirdparty/take_two
 	url = https://github.com/jeffmm/take_two
 	branch = submodule
+[submodule "v4-unit-tests/thirdparty/catch2"]
+	path = v4-unit-tests/thirdparty/catch2
+	url = https://github.com/catchorg/Catch2
+[submodule "v5-documentation/thirdparty/catch2"]
+	path = v5-documentation/thirdparty/catch2
+	url = https://github.com/catchorg/Catch2
+[submodule "v6-continuous-integration/thirdparty/catch2"]
+	path = v6-continuous-integration/thirdparty/catch2
+	url = https://github.com/catchorg/Catch2

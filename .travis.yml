@@ -5,7 +5,7 @@ compiler:
   - clang
 
 before_script:
-  - cd v5
+  - cd v6-continuous-integration
   - mkdir build
   - cd build
   - cmake -DTESTS=TRUE ..
