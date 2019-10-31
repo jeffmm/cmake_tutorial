@@ -1,4 +1,4 @@
-# Take Two v0.4
+# TakeTwo v0.5
 
 ## Let's add documentation with Doxygen
 
@@ -15,6 +15,9 @@ take_two
 ├── example
 │   ├── CMakeLists.txt
 │   └── example.cpp
+├── thirdparty
+│   ├── CMakeLists.txt
+│   └── catch2
 ├── tests
 │   ├── CMakeLists.txt
 │   └── test_take_two.cpp
@@ -43,18 +46,17 @@ doxygen_add_docs(docs
 And your `docs/main.md` file should be a markdown document containing the introduction to your documentation, with the `{#mainpage}` tag on the title, like so
 
 ```md
-# Take Two Documentation {#mainpage}
+# TakeTwo Documentation {#mainpage}
 
 This is the documentation for my TakeTwo library.
 
 ...
-
 ```
 
 Now add the following lines to your top-level `CMakeLists.txt` file:
 
 ```cmake
-# Only build documentation if this is the main project, and not if it is included through add_subdirectory
+# Only build documentation if this is the main project
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     # Docs only available if this is the main project
     find_package(Doxygen QUIET)
@@ -66,7 +68,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 ```
 
-The only thing left to do is add the documentation itself using the Doxygen syntax. In my example, I document the `TakeTwo` class and its method functions like so
+Now we need to write the documentation itself using the Doxygen syntax. In my example, I document the `TakeTwo` class and its method functions like so
 
 ```cpp
 /// Take two floating point numbers and perform some simple arithmetic.
@@ -84,7 +86,7 @@ public:
 }
 ```
 
-Now when you are building your project, you can build the documentation using the `docs` make target, assuming you have doxygen installed
+When you are building your project, you can now build the documentation using the `docs` make target, assuming you have doxygen installed
 
 ```bash
 mkdir build
@@ -93,4 +95,4 @@ cmake ..
 make docs
 ```
 
-Check out your automatically-generated html documentation located in your `build` folder at `docs/html/index.html` by opening it in your web browser.
+Now check out your automatically-generated html documentation by opening `build/docs/html/index.html` in your web browser.

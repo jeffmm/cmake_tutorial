@@ -1,61 +1,110 @@
-# Take Two v0.5
+# Take Two v0.2
 
-## Let's add continuous integration using Travis CI
+## Let's create a new project that uses TakeTwo as a dependency
 
-For starters, go to https://travis-ci.com and log in using your GitHub credentials. If you haven't already, grant Travis CI access to your GitHub repository.
+Create a new git repository and give it a name like take_two_project
 
-Create a file in your project folder named `.travis.yml`
+The project structure should look similar to this
 
 ```bash
-take_two
-├── include
-│   └── take_two
-│       └── take_two.hpp
+take_two_project
 ├── src
 │   ├── CMakeLists.txt
 │   └── take_two.cpp
-├── example
-│   ├── CMakeLists.txt
-│   └── example.cpp
-├── tests
-│   ├── CMakeLists.txt
-│   └── test_take_two.cpp
-├── docs
-│   ├── CMakeLists.txt
-│   └── main.md
+├── thirdparty
+│   └── CMakeLists.txt
 ├── README.md
 ├── CMakeLists.txt
-├── .travis.yml
 └── .gitignore
 ```
 
-This yaml file will tell Travis CI how to test your project and make sure everything's in working order.
+Since take_two_project will only be an executable binary, there is no include folder here.
 
-This is done using a set of instructions that tells the virtual machine at Travis CI what steps to perform in order to run your project's unit tests
+The top-level CMakeLists.txt file should look like this:
 
-```yaml
-language: cpp
+```cmake
+cmake_minimum_required(VERSION 3.4)
+project(TakeTwoProject
+    VERSION 0.1
+    DESCRIPTION "A project that uses TakeTwo as a submodule"
+    LANGUAGES CXX
+)
 
-compiler:
-  - gcc
-  - clang
+add_subdirectory(thirdparty)
 
-before_script:
-  - mkdir build
-  - cd build
-  - cmake -DTESTS=TRUE ..
-
-script: make && make test
+add_subdirectory(src)
 ```
 
-After pushing your changes to your GitHub repository, navigate to https://www.travis-ci.com to watch your build get tested in real time.
+The `src/CMakeLists.txt` file should look like this:
 
-If you want, you can have Travis CI email you whenever your build fails.
+```cmake
+# Represent all files that end with .cpp with the SOURCES variable
+file (GLOB SOURCES "*.cpp")
 
-Once your build succeeds, you can show off your achievement by clicking on the status image next to the repository name on Travis CI, setting the format to Markdown, and copying the result to the top of your `README.md` file. The result will look like:
+# Compile sources into an executable binary
+add_executable (take_two_project ${SOURCES})
 
-[![Build Status](https://travis-ci.com/jeffmm/take_two.svg?branch=master)](https://travis-ci.com/jeffmm/take_two)
+# Link the take_two library to the executable
+target_link_libraries (take_two_project take_two)
 
-Now all you have left to do is write a brief explanation about your project in your README and add a LICENSE.
+# Install the executable locally
+install(TARGETS take_two_project DESTINATION bin)
+```
 
-Congratulations, your project now looks pro!
+And your `thirdparty/CMakeLists.txt` file only needs the line:
+
+```cmake
+add_subdirectory (take_two)
+```
+
+Now we will add the take_two project repository as a submodule for our new project.
+
+```bash
+cd thirdparty
+git submodule add https://github.com/<your_github_username>/take_two.git take_two
+```
+
+This will clone your take_two project repository into the `thirdparty` folder, and register take_two as a submodule in a newly-created `.gitmodules` file.
+
+Note: the take_two_project repo will **not** track the submodule's files, but instead tracks a pointer to a single commit in the submodule repository. By default, this commit is the most recent commit on the submodule's master branch. You can choose to track a different branch using the command `git submodule add -b <branch_name> <repo_url> <local_folder>`.
+
+In my example case here, my submodule is pointing to a branch named `submodule` in this same repository, which is identical to the contents of the `v1-cmake-intro` folder.
+
+Now we can compose a simple main function that utilizes the take_two library. For example, my `src/take_two_project.cpp` file looks like this:
+
+```cpp
+#include <iostream>
+#include <take_two/take_two.hpp>
+
+int main() {
+  std::cout << "12 + 21 = " << TakeTwo::Add(12, 21) << std::endl;
+  return 0;
+}
+```
+
+Now all that's left to do is compile and run the binary.
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+The `take_two_project` binary will be built inside `src` folder in the `build` folder, and can be executed with
+
+```bash
+./src/take_two_project
+```
+
+Or we can install the binary locally with
+
+```bash
+make install
+```
+
+And run the executable anywhere as long as the install location is in our PATH
+
+```bash
+take_two_project
+```

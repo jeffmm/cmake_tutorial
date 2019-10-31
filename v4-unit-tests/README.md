@@ -2,7 +2,7 @@
 
 ## Let's add some unit tests
 
-Add a folder named `tests` to your directory like so
+Add a folder named `thirdparty` and a folder named `tests` to your directory like so
 
 ```bash
 take_two
@@ -12,9 +12,11 @@ take_two
 ├── src
 │   ├── CMakeLists.txt
 │   └── take_two.cpp
-├── example
+├── examples
 │   ├── CMakeLists.txt
 │   └── example.cpp
+├── thirdparty
+│   └── CMakeLists.txt
 ├── tests
 │   ├── CMakeLists.txt
 │   └── test_take_two.cpp
@@ -43,35 +45,50 @@ TEST_CASE("TakeTwo test") {
 Now let's add Catch2 as a submodule to the project.
 
 ```bash
-cd tests
+cd thirdparty
 git submodule add https://github.com/catchorg/Catch2 catch2
 ```
 
-This will clone the Catch2 repository into the `tests` folder as a submodule. (NOTE: There is not much benefit in adding Catch2 as a submodule, since it can be included in your project as a single header file! This is meant for instructive purposes).
+This will clone the Catch2 repository into the `thirdparty` folder as a submodule. (NOTE: There is not much benefit in adding Catch2 as a submodule, since it can be included in your project as a single header file! This is meant for instructive purposes).
 
-The file `tests/CMakeLists.txt` will be
+The `thirdparty/CMakeLists.txt` file should be
 
 ```cmake
-add_subdirectory(catch2)
+# Add catch2 only if this is the main project and we are building tests
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND TESTS)
+    add_subdirectory(catch2)
+endif()
+```
 
+and the `tests/CMakeLists.txt` file should be
+
+```cmake
+# Add the test as an executable
 add_executable(test_take_two test_take_two.cpp)
 
+# Link to the take_two library and Catch2 testing library
 target_link_libraries(test_take_two PRIVATE take_two Catch2::Catch2)
 
+# Add the test to CTest, so it will be run with the 'test' make-target
 add_test(NAME take_two_test COMMAND test_take_two)
 ```
 
 Now we need to change the top-level `CMakeLists.txt` file to optionally include the unit tests in the build. Add the following to the end of the file:
 
 ```cmake
-# Testing only available if this is the main project
+# This line should be included before add_subdirectory(src) if there are additional
+# third-party dependencies
+add_subdirectory(thirdparty)
+
+# Testing is only available if this is the main project and the flag -DTESTS=TRUE
+# is provided to CMake
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
 ```
 
-Now remove any existing build folder and build the project and run the unit tests with
+Now add and commit your changes once again. Remove any existing build folder and build the project and run the unit tests with
 
 ```bash
 mkdir build
@@ -81,4 +98,4 @@ make
 make test
 ```
 
-If everything goes well, all tests should pass. These unit tests will be how we implement continuous integration later on.
+If everything is well, all tests will pass. These unit tests will be how we implement continuous integration later on.

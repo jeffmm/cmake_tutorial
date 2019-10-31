@@ -1,6 +1,8 @@
-# Take Two v0.1
+# TakeTwo v0.1
 
 ## Make the local git repo
+
+We first initialize an empty git repository locally, for a project named take_two
 
 ```bash
 mkdir take_two
@@ -8,26 +10,24 @@ cd take_two
 # Initialize the folder as a git repository
 git init
 # Create a README file
-echo "# Take Two" >> README.md
+echo "# TakeTwo" >> README.md
 # Add the README file and make your first commit
 git add README.md
 git commit -m "First commit"
 ```
 
-Now create an empty repository on GitHub named take_two. Then push your local repository to the remote GitHub repository
+Now create an empty repository on GitHub with the name take_two. Push your local repository to the remote GitHub repository using the commands
 
 ```bash
-# Add remote github repo to track local repo
+# Have remote GitHub repo track our local git repo
 git remote add origin https://github.com/<your_username>/take_two
-# Verify the remote url
-git remote -v
-# Push the commit
+# Push the commit to the remote
 git push -u origin master
 ```
 
 ## Organize the directory structure
 
-Create folders and files like so
+A CMake library is typically organized in the following way:
 
 ```bash
 take_two
@@ -42,13 +42,7 @@ take_two
 └── .gitignore
 ```
 
-The files `include/take_two/take_two.hpp` and `src/take_two.cpp` will be the header and source files for the Take Two library. In my example, the library has a single class `TakeTwo`, which wraps a static member function that takes two values and computes some basic arithmetic (boring, I know, but it's instructive).
-
-The `.gitignore` file should have the line
-
-```bash
-/build*
-```
+The files `include/take_two/take_two.hpp` and `src/take_two.cpp` will be the header and source files for the TakeTwo library. In my example project, the library has a single class `TakeTwo`, which wraps a static member function that takes two values and computes some basic arithmetic (boring, I know, but it's instructive).
 
 and the top-level `CMakeLists.txt` file should be
 
@@ -74,17 +68,25 @@ and the file `src/CMakeLists.txt` should be
 set (HEADERS ../include/take_two/take_two.hpp)
 
 # Make a static library (tradeoff of memory for better performance)
-add_library (take_two STATIC take_two.cpp ${HEADERS})
+add_library (TakeTwo STATIC take_two.cpp ${HEADERS})
 
 # Set target includes
-target_include_directories (take_two PUBLIC ../include)
+target_include_directories (TakeTwo PUBLIC ../include)
 
 # Make install targets
-install (TARGETS take_two DESTINATION lib)
+install (TARGETS TakeTwo DESTINATION lib)
 install (FILES ${HEADERS} DESTINATION include/take_two)
 ```
 
-Then add and push the changes to the remote
+The `.gitignore` file should have the line:
+
+```bash
+/build*
+```
+
+as well as any additional files you do **not** want to be tracked in your git repo.
+
+Add and commit your changes locally, then push the changes to your remote repo on GitHub.
 
 ```bash
 git add -A
@@ -92,7 +94,7 @@ git commit -m "Built directory structure"
 git push origin master
 ```
 
-To build the library, do the following
+To build the library using CMake, do the following
 
 ```bash
 mkdir build
@@ -101,18 +103,18 @@ cmake ..
 make
 ```
 
-The library `libtake_two.a` will be built inside the `src` folder in the new `build` directory. To install the library on a local machine, you could copy `include/take_two` into your `/usr/local/include` and copy `libtake_two.a` into your `/usr/local/lib`.
+The library `libTakeTwo.a` will be built inside the `src` folder in the new `build` directory. To install the library on a local machine, you could copy `include/take_two` into your `/usr/local/include` and copy `libTakeTwo.a` into your `/usr/local/lib`.
 
-Our install targets handle this automatically. Simply do
+Our install make target handles this automatically. Simply do
 
 ```bash
 make install
 ```
 
-And you can start using the library right away using the usual linking:
+and you can start using the library right away using the usual linking:
 
 ```bash
-g++ myproject.cpp -ltake_two
+g++ myproject.cpp -lTakeTwo
 ```
 
-You could also include Take Two as a subproject in the parent project's build tree by including Take Two as a submodule. More on that later.
+You could also include TakeTwo as a subproject in the parent project's build tree by adding it as a submodule. We'll discuss how to do that next.
