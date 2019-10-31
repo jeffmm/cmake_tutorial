@@ -26,5 +26,5 @@ install(TARGETS TakeTwo
 install(EXPORT TakeTwoTargets
     NAMESPACE TakeTwo::
     FILE TakeTwoConfig.cmake
-    DESTINATION lib/cmake/take_two)
+    DESTINATION lib/cmake/TakeTwo)
 
