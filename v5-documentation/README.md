@@ -32,15 +32,17 @@ take_two
 The `docs/CMakeLists.txt` file will assist in building your project's documentation using [Doxygen](http://www.doxygen.nl). You can install doxygen using your package manager from the command line (apt for Ubuntu, homebrew for Mac, etc). The `docs/CMakeLists.txt` file should be:
 
 ```cmake
+# disable complaints about undocumented functions (assumes all are documented)
 set(DOXYGEN_EXTRACT_ALL YES)
+# enable support for standard library functions (e.g. std::vector)
 set(DOXYGEN_BUILTIN_STL_SUPPORT YES)
 
+# Add sources for documents (can use a GLOB here for multiple headers)
 doxygen_add_docs(docs
     take_two/take_two.hpp
     "${CMAKE_CURRENT_SOURCE_DIR}/main.md"
     WORKING_DIRECTORY
-    "${PROJECT_SOURCE_DIR}/include"
-)
+    "${PROJECT_SOURCE_DIR}/include")
 ```
 
 And your `docs/main.md` file should be a markdown document containing the introduction to your documentation, with the `{#mainpage}` tag on the title, like so
