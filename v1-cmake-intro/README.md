@@ -48,7 +48,7 @@ take_two
 
 The files `include/take_two/take_two.hpp` and `src/take_two.cpp` will be the header and source files for the TakeTwo library. In my example project, the library has a single class `TakeTwo`, which wraps a static member function that takes two values and computes some basic arithmetic (boring, I know, but it's instructive).
 
-and the top-level `CMakeLists.txt` file should always start with the `cmake_minimum_required()` function, followed by the `project()` details.
+The top-level `CMakeLists.txt` file contains the instructions that CMake will use to build our project. The file should always start with the `cmake_minimum_required()` function, followed by the `project()` details.
 
 ```cmake
 # Tested for CMake version 3.4+
@@ -61,11 +61,11 @@ project(TakeTwo
     LANGUAGES CXX
 )
 
-# The compiled library code is here
+# The library source code is here
 add_subdirectory(src)
 ```
 
-This `CMakeLists.txt` file will tell CMake to now search the `src` directory for additional CMake files. The file `src/CMakeLists.txt` will give CMake the instructions on how to build the library.
+The `add_subdirectory()` function will tell CMake to search the `src` directory for additional CMake files. The file `src/CMakeLists.txt` will give CMake the instructions on how to build the library.
 
 ```cmake
 # Define library headers
