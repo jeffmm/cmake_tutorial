@@ -58,8 +58,7 @@ cmake_minimum_required(VERSION 3.4)
 project(TakeTwo
     VERSION 0.1
     DESCRIPTION "An example project with CMake"
-    LANGUAGES CXX
-)
+    LANGUAGES CXX)
 
 # The library source code is here
 add_subdirectory(src)
