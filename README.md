@@ -9,6 +9,6 @@ TakeTwo is a small project used for teaching how to:
 * [build documentation with Doxygen using CMake](v5-documentation)
 * [use continuous integration with Travis CI](v6-continuous-integration)
 * [use Docker to ship pre-compiled libraries in a platform-independent way](v7-docker)
-* [scaffold your future projects using Cookiecutter](v7-cookiecutter)
+* [scaffold your future projects using Cookiecutter](v8-cookiecutter)
 
 Step-by-step instructions for following along with the project are in the subfolder READMEs.
