@@ -1,6 +1,10 @@
 # TakeTwo v0.1
 
-## Make the local git repo
+This tutorial is meant to help developers who are new to CMake get started by building a C++ library. I will provide step-by-step instructions on building a simple library called TakeTwo. There are more advanced tutorials out there, but my goal is to start from a minimalist foundation, and gradually build up to a project that has unit tests, continuous integration, containerization, etc.
+
+Let's get started.
+
+## Make the git repo
 
 We first initialize an empty git repository locally, for a project named take_two
 
@@ -47,7 +51,7 @@ The files `include/take_two/take_two.hpp` and `src/take_two.cpp` will be the hea
 and the top-level `CMakeLists.txt` file should always start with the `cmake_minimum_required()` function, followed by the `project()` details.
 
 ```cmake
-# Tested for CMake version 3.XX
+# Tested for CMake version 3.4+
 cmake_minimum_required(VERSION 3.4)
 
 # Project name and a few useful settings. Other commands can pick up the results
