@@ -70,6 +70,7 @@ Now we will add the TakeTwo project repository as a submodule for our new projec
 
 ```bash
 cd thirdparty
+# Add TakeTwo as a submodule
 git submodule add https://github.com/<your_github_username>/take_two.git take_two
 ```
 
