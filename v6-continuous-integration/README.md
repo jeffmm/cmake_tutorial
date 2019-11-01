@@ -16,7 +16,7 @@ take_two
 ├── src
 │   ├── CMakeLists.txt
 │   └── take_two.cpp
-├── example
+├── examples
 │   ├── CMakeLists.txt
 │   └── example.cpp
 ├── thirdparty
