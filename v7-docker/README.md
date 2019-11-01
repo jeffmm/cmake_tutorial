@@ -245,7 +245,9 @@ WORKDIR /app
 ENTRYPOINT ["take_two_project"]
 ```
 
-The `ENTRYPOINT` command makes the default container behavior execute your take_two_project binary. Building this container from within the `docker` folder using
+In my example repository, my `docker/Dockerfile` is the one you used to build the image `<your_username>/take_two`.
+
+In `Dockerfile` for the TakeTwoProject, the `ENTRYPOINT` command makes the default container behavior execute your take_two_project binary. Building this container from within the `docker` folder using
 
 ```bash
 docker build -t <your_username>/take_two_project .
@@ -257,6 +259,6 @@ and running it anywhere on your machine with
 docker run --rm <your_username>/take_two_project
 ```
 
-would run the take_two_project binary by default. Like before, you can mount your local repository using the `-v ${PWD}:/app` flags, in case your program needs to produce any output or act on local files.
+would run the take_two_project binary by default. Like before, you can mount your local repository using the `-v ${PWD}:/app` flags, in case your program needs to produce any output or needs access to local files.
 
 That's it! If you wanted to go the extra mile, you could set up Travis CI to test building the Docker image, or run your library unit tests on the Docker image. Either way, users of your library now only need Docker installed to immediately use your code in a platform-independent environment.
