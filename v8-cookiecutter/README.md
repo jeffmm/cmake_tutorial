@@ -1,4 +1,4 @@
-# Building a Cookie-Cutter
+# Scaffolding a project with Cookiecutter
 
 So far, we've been building a repo with a basic pattern:
 
