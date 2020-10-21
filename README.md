@@ -1,7 +1,8 @@
-# TakeTwo
-[![Build Status](https://travis-ci.com/jeffmm/take_two.svg?branch=master)](https://travis-ci.com/jeffmm/take_two)
+# CMake Tutorial
+[![Build Status](https://travis-ci.com/jeffmm/take_two.svg?branch=master)](https://travis-ci.com/jeffmm/cmake_tutorial)
 
-TakeTwo is a small project used for teaching how to:
+
+This is a small project used for teaching how to:
 * [build a C++ library using CMake](v1-cmake-intro)
 * [use git submodules](v2-submodules)
 * [build example executables with your library](v3-examples)
